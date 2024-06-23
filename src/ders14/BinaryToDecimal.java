@@ -1,0 +1,9 @@
+package ders14;
+
+public class BinaryToDecimal {
+    public static void main(String[] args) {
+        String binaryString = "1100101";
+        int decimal = Integer.parseInt(binaryString, 2);
+        System.out.println(decimal);
+    }
+}
