@@ -1,5 +1,9 @@
 package az.developia.Book_api.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -7,9 +11,11 @@ import az.developia.Book_api.entity.BookEntity;
 import az.developia.Book_api.exception.OurException;
 import az.developia.Book_api.repository.BookRepository;
 import az.developia.Book_api.request.BookAddRequestDTO;
+import az.developia.Book_api.request.BookUpdateNameRequestDTO;
 import az.developia.Book_api.request.BookUpdateRequestDTO;
 import az.developia.Book_api.response.BookListResponseDTO;
 import az.developia.Book_api.response.BookResponseDTO;
+import az.developia.Book_api.response.BookResponseDTOEntity;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -29,6 +35,15 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public BookListResponseDTO findAll() {
+		List<BookEntity> entities = repository.findAll();
+		BookListResponseDTO dto = new BookListResponseDTO();
+		List<BookResponseDTOEntity> dtoEntities = new ArrayList<BookResponseDTOEntity>();
+		for (BookEntity en : entities) {
+			BookResponseDTOEntity dt = new BookResponseDTOEntity();
+			mapper.map(en, dt);
+			dtoEntities.add(dt);
+		}
+		dto.setBooks(dtoEntities);
 		return null;
 	}
 
@@ -51,6 +66,14 @@ public class BookServiceImpl implements BookService {
 		BookEntity entity = repository.findById(id).orElseThrow(()->new OurException("kitab tapilmadi", "",null));
 		mapper.map(req, entity);
 		repository.save(entity);
+	}
+
+	@Override
+	public void updateName(BookUpdateNameRequestDTO req) {
+		Long id = req.getId();
+		BookEntity entity = repository.findById(id).orElseThrow(()->new OurException("kitab tapilmadi", "",null));
+		mapper.map(req, entity);
+		repository.save(entity);		
 	}
 
 }

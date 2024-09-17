@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class BookListResponseDTO {
-	private List<BookResponseDTO> books;
+	private List<BookResponseDTOEntity> books;
 }
