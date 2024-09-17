@@ -64,7 +64,7 @@ public class BookRestController {
 		return service.findById(id);
 	}
 	
-	@GetMapping(path = "/{id}")
+	@GetMapping
 	public BookListResponseDTO findAll() {
 
 		return service.findAll();
