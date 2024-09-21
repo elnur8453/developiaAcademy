@@ -21,6 +21,8 @@ public class BookEntity {
   
   private String name;
   
+  private double price;
+  
   private Integer pageCount;
   
   private String author;

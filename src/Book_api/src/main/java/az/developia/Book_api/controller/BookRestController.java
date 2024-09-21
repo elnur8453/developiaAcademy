@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import az.developia.Book_api.MessageSender;
 import az.developia.Book_api.exception.OurException;
 import az.developia.Book_api.request.BookAddRequestDTO;
 import az.developia.Book_api.request.BookUpdateNameRequestDTO;
@@ -29,7 +30,8 @@ import lombok.RequiredArgsConstructor;
 public class BookRestController {
 
 	private final BookService service;
-	
+	private final MessageSender sender;
+
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void add(@Valid @RequestBody BookAddRequestDTO req,BindingResult br) {
@@ -66,7 +68,7 @@ public class BookRestController {
 	
 	@GetMapping
 	public BookListResponseDTO findAll() {
-
+		sender.send(" yeyinti var");
 		return service.findAll();
 	}
 	
