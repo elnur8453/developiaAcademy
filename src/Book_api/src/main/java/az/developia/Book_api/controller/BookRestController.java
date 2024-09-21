@@ -80,4 +80,18 @@ public class BookRestController {
 		}
 		service.updateName(req);
 	}
+	
+	@GetMapping(path = "/pagination/begin/{begin}/length/{length}")
+	// /books/pagination/begin/90/length/20
+	public BookListResponseDTO findAllPagination(@PathVariable Integer begin, @PathVariable Integer length) {
+		sender.send(" yeyinti var");
+		return service.findAllPagination(begin,length);
+	}
+	
+	@GetMapping(path = "/name/{name}")
+	public BookListResponseDTO findByName(@PathVariable String name) {
+
+		return service.findByName(name);
+	}
+	
 }

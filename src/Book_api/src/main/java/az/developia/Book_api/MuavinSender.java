@@ -9,7 +9,7 @@ public class MuavinSender implements MessageSender{
 
 	@Override
 	public void send(String message) {
-		System.out.println("bunu muavine gonder");
+		System.out.println("bunu muavine gonder"+message);
 	}
 
 }

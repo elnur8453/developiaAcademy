@@ -6,7 +6,5 @@ import lombok.Data;
 public class BookResponseDTO {
 	private Long id;
 	private String name;
-	private String author;
-	private double price;
-	private int pageCount;
+	
 }
