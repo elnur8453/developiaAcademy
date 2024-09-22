@@ -22,12 +22,12 @@ import lombok.RequiredArgsConstructor;
 public class BookServiceImpl implements BookService {
 
 	private final BookRepository repository;
-	
+
 	private final ModelMapper mapper;
 
 	@Override
 	public void add(BookAddRequestDTO req) {
-		BookEntity entity = new BookEntity();	
+		BookEntity entity = new BookEntity();
 		mapper.map(req, entity);
 		repository.save(entity);
 	}
@@ -35,20 +35,13 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public BookListResponseDTO findAll() {
 		List<BookEntity> entities = repository.findAll();
-		BookListResponseDTO dto = new BookListResponseDTO();
-		List<BookResponseDTOEntity> dtoEntities = new ArrayList<BookResponseDTOEntity>();
-		for (BookEntity en : entities) {
-			BookResponseDTOEntity dt = new BookResponseDTOEntity();
-			mapper.map(en, dt);
-			dtoEntities.add(dt);
-		}
-		dto.setBooks(dtoEntities);
-		return null;
+		return entitiesToDtos(entities);
+
 	}
 
 	@Override
 	public BookResponseDTO findById(Long id) {
-		BookEntity entity = repository.findById(id).orElseThrow(()->new OurException("kitab tapilmadi", "",null));
+		BookEntity entity = repository.findById(id).orElseThrow(() -> new OurException("kitab tapilmadi", "", null));
 		BookResponseDTO dto = new BookResponseDTO();
 		mapper.map(entity, dto);
 		return dto;
@@ -62,7 +55,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void update(BookUpdateRequestDTO req) {
 		Long id = req.getId();
-		BookEntity entity = repository.findById(id).orElseThrow(()->new OurException("kitab tapilmadi", "",null));
+		BookEntity entity = repository.findById(id).orElseThrow(() -> new OurException("kitab tapilmadi", "", null));
 		mapper.map(req, entity);
 		repository.save(entity);
 	}
@@ -70,28 +63,25 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void updateName(BookUpdateNameRequestDTO req) {
 		Long id = req.getId();
-		BookEntity entity = repository.findById(id).orElseThrow(()->new OurException("kitab tapilmadi", "",null));
+		BookEntity entity = repository.findById(id).orElseThrow(() -> new OurException("kitab tapilmadi", "", null));
 		mapper.map(req, entity);
-		repository.save(entity);		
+		repository.save(entity);
 	}
 
 	@Override
 	public BookListResponseDTO findAllPagination(Integer begin, Integer length) {
-		List<BookEntity> entities = repository.findAllPagination(begin,length);
-		BookListResponseDTO dto = new BookListResponseDTO();
-		List<BookResponseDTOEntity> dtoEntities = new ArrayList<BookResponseDTOEntity>();
-		for (BookEntity en : entities) {
-			BookResponseDTOEntity dt = new BookResponseDTOEntity();
-			mapper.map(en, dt);
-			dtoEntities.add(dt);
-		}
-		dto.setBooks(dtoEntities);
-		return null;		
+		List<BookEntity> entities = repository.findAllPagination(begin, length);
+		return entitiesToDtos(entities);
+
 	}
 
 	@Override
 	public BookListResponseDTO findByName(String name) {
 		List<BookEntity> entities = repository.findAllSearch(name);
+		return entitiesToDtos(entities);
+	}
+
+	private BookListResponseDTO entitiesToDtos(List<BookEntity> entities) {
 		BookListResponseDTO dto = new BookListResponseDTO();
 		List<BookResponseDTOEntity> dtoEntities = new ArrayList<BookResponseDTOEntity>();
 		for (BookEntity en : entities) {
@@ -100,7 +90,6 @@ public class BookServiceImpl implements BookService {
 			dtoEntities.add(dt);
 		}
 		dto.setBooks(dtoEntities);
-		return null;
+		return dto;
 	}
-
 }
