@@ -1,5 +1,7 @@
 package az.developia.Book_api.entity;
 
+import org.hibernate.annotations.Immutable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,20 +11,25 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Table(name = "order_details")
+@Table(name = "customers")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDetailEntity {
+@Immutable
+@ToString
+public class CustomerViewEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private Long id;
 
-	private Double quantity;
+	private String name;
+
+	private String phone;
 	
-	  
+	
 }

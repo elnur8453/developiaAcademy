@@ -1,13 +1,11 @@
 package az.developia.Book_api.entity;
 
-import java.util.List;
+import org.hibernate.annotations.Immutable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +18,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class CustomerEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +29,5 @@ public class CustomerEntity {
 
 	private String phone;
 	
-	@OneToMany
-	@JoinColumn(name = "customer_id")
-	List<OrderEntity> orders;
+	private Integer orderCount;
 }
