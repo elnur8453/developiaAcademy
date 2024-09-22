@@ -26,7 +26,7 @@ public class OrderDetailEntity {
 
 	private Double quantity;
 	
-	@OneToOne(mappedBy = "orderDetail")
+	@OneToOne
 	@JoinColumn(name = "product_id")
 	private ProductEntity product;
 }

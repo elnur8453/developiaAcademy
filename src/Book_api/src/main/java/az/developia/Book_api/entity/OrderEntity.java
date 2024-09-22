@@ -28,7 +28,8 @@ public class OrderEntity {
 
 	private Double price;
 
+	
+	@JoinColumn(name = "order_id")
 	@OneToMany
-	@JoinColumn(name = "customer_id")
 	List<OrderDetailEntity> details;
 }
