@@ -1,5 +1,7 @@
 package az.developia.Book_api.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,5 +29,8 @@ public class BookEntity {
   
   private String author;
   
+  private String creator;
+  
+  private LocalDateTime registerDate;
 
 }
