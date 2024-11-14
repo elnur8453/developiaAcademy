@@ -53,7 +53,7 @@ public class IncomeCategoryController {
 	}
 
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping(path = "/{id}")
 	@PreAuthorize(value = "hasAuthority('ROLE_DELETE_INCOME_CATEGORY')")
 	public void deleteIncomeCategory(@PathVariable Integer id) {
 		incomeService.deleteById(id);

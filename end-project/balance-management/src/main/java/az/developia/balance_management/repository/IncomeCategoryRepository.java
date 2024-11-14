@@ -11,7 +11,7 @@ import az.developia.balance_management.entity.IncomeCategoryEntity;
 @Repository
 public interface IncomeCategoryRepository extends JpaRepository<IncomeCategoryEntity, Integer>{
 
-	@Query(value = "select * from expense_categories limit ?1,?2",nativeQuery = true)
+	@Query(value = "select * from income_categories limit ?1,?2",nativeQuery = true)
 	List<IncomeCategoryEntity> findAllPagination(String name, int begin, int length);
 
 }

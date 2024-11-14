@@ -61,9 +61,6 @@ public class IncomeCategoryService {
     
 	
 	public void deleteById(Integer id) {
-		if (id == null || id == 0) {
-	        throw new OurRuntimeException("ID mütləqdir");
-	    }
 
 		Optional<IncomeCategoryEntity> op = incomeRepository.findById(id);
 	    if (op.isPresent()) {

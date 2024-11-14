@@ -18,7 +18,6 @@ import az.developia.balance_management.request.ExpenseCategoryAddRequest;
 import az.developia.balance_management.request.ExpenseCategoryUpdateRequest;
 import az.developia.balance_management.response.ExpenseCategoryListResponse;
 import az.developia.balance_management.service.ExpenseCategoryService;
-import az.developia.balance_management.service.IncomeCategoryService;
 
 @RestController
 @RequestMapping("/expense-categories")
@@ -27,7 +26,7 @@ public class ExpenseCategoryController {
 	@Autowired
 	private ExpenseCategoryService expenseService;
 	
-	//xərc kateqoriyası yaratmaq
+	
 	@PostMapping(path = "/create-expense-category")
 	@PreAuthorize(value = "hasAuthority('ROLE_ADD_EXPENSE_CATEGORY')")
 	public void addExpenseCategory(@RequestBody ExpenseCategoryAddRequest addRequest, BindingResult br) {
@@ -37,7 +36,7 @@ public class ExpenseCategoryController {
 		expenseService.createExpenseCategory(addRequest);
 	}
 	
-	//Xərc kateqoriyalarını əldə etmək
+	
 	@GetMapping(path = "/get-expense-categories")
 	@PreAuthorize(value = "hasAuthority('ROLE_GET_EXPENSE_CATEGORY_LIST')")
 	public ExpenseCategoryListResponse getExpenseCategories (@RequestParam(name = "name", required = false, defaultValue = "") String name,
@@ -46,14 +45,14 @@ public class ExpenseCategoryController {
 		return expenseService.getExpenseCategories(name, begin, length);
 	}
 	
-	//xerc kateqoriyasini yenilemek
-	@PutMapping(path = "/{id}")
+	
+	@PutMapping()
 	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_EXPENSE_CATEGORY')")
 	public void updateExpenseCategory(@RequestBody ExpenseCategoryUpdateRequest updateRequest) {
 		expenseService.updateExpenseCategory(updateRequest);
 	}
 	
-	//xerc kateqoriya silmek
+	
 	@DeleteMapping("/{id}")
 	@PreAuthorize(value = "hasAuthority('ROLE_DELETE_EXPENSE_CATEGORY')")
 	public void deleteEexpenseCategory(@PathVariable Integer id) {

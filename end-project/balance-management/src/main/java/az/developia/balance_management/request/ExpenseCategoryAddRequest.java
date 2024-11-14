@@ -1,6 +1,7 @@
 package az.developia.balance_management.request;
 
 public class ExpenseCategoryAddRequest {
+	
     private String name;
 
 	public ExpenseCategoryAddRequest() {
